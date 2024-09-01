@@ -1,5 +1,7 @@
 const express = require("express")
 const database = require("./config/database")
+const Task = require("./models/task.model")
+
 require("dotenv").config()
 
 const app = express()
@@ -7,8 +9,27 @@ const port = process.env.port
 
 database.connect()
 
-app.get("/tasks", (req, res) => {
-  res.send("Danh sách các công việc")
+app.get("/tasks", async (req, res) => {
+  const tasks = await Task.find({
+    deleted: false
+  })
+
+  res.json(tasks)
+})
+
+app.get("/tasks/detail/:id", async (req, res) => {
+  try {
+    const id = req.params.id
+
+    const task = await Task.findOne({
+      _id: id,
+      deleted: false
+    })
+
+    res.json(task)
+  } catch (e) {
+    res.json("Không tìm thấy")
+  }
 })
 
 app.listen(port, () => {
