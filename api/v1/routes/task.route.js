@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router();
 const Task = require("../../../models/task.model")
 
-router.get("/tasks", async (req, res) => {
+router.get("", async (req, res) => {
   const tasks = await Task.find({
     deleted: false
   })
@@ -10,7 +10,7 @@ router.get("/tasks", async (req, res) => {
   res.json(tasks)
 })
 
-router.get("/tasks/detail/:id", async (req, res) => {
+router.get("/detail/:id", async (req, res) => {
   try {
     const id = req.params.id
 
