@@ -13,7 +13,7 @@ module.exports.index = async (req, res) => {
 
   let initPagination = {
     currentPage: 1,
-    limitItems: 2
+    limitItem: 2,
   }
 
   const countTasks = await Task.countDocuments(find)
@@ -30,7 +30,7 @@ module.exports.index = async (req, res) => {
   }
   const tasks = await Task.find(find)
     .sort(sort)
-    .limit(objectPagination.limitItems)
+    .limit(objectPagination.limitItem)
     .skip(objectPagination.skip)
 
   res.json(tasks)
