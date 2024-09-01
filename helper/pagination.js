@@ -1,16 +1,11 @@
-module.exports = (objectPagination, query, countProduct) => {
+module.exports = (objectPagination, query, countRecords) => {
   if (query.page) {
-    if (parseInt(query.page)) {
-      objectPagination.currentPage = parseInt(query.page)
-    } else {
-      objectPagination.currentPage = 1
-    }
+    objectPagination.currentPage = parseInt(query.page)
   }
 
   objectPagination.skip = (objectPagination.currentPage - 1) * objectPagination.limitItem
 
-  const totalPage = Math.ceil(countProduct / objectPagination.limitItem)
-  objectPagination.totalPage = totalPage
+  objectPagination.totalPage = Math.ceil(countRecords / objectPagination.limitItem)
 
   return objectPagination;
 }

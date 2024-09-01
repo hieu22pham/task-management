@@ -13,14 +13,14 @@ module.exports.index = async (req, res) => {
 
   let initPagination = {
     currentPage: 1,
-    limitItems: 4
+    limitItems: 2
   }
 
-  const countProducts = await Task.countDocuments(find)
+  const countTasks = await Task.countDocuments(find)
   const objectPagination = paginationHelper(
     initPagination,
     req.query,
-    countProducts
+    countTasks
   )
 
   const sort = {}
