@@ -3,9 +3,16 @@ const router = express.Router();
 const Task = require("../../../models/task.model")
 
 router.get("", async (req, res) => {
-  const tasks = await Task.find({
+  console.log(req.query)
+  const find = {
     deleted: false
-  })
+  }
+
+  if (req.query.status) {
+    find.status = req.query.status
+  }
+
+  const tasks = await Task.find(find)
 
   res.json(tasks)
 })
