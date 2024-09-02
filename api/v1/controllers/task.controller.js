@@ -18,6 +18,7 @@ module.exports.index = async (req, res) => {
     find.title = objectSearch.regex
   }
 
+
   let initPagination = {
     currentPage: 1,
   }
