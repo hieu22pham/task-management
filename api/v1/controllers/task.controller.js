@@ -60,3 +60,12 @@ module.exports.detail = async (req, res) => {
     res.json("Không tìm thấy")
   }
 }
+
+module.exports.changeStatus = async (req, res) => {
+  const id = req.params.id
+
+  console.log(req.body)
+  res.json({
+    id: id
+  })
+}
