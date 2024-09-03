@@ -63,9 +63,18 @@ module.exports.detail = async (req, res) => {
 
 module.exports.changeStatus = async (req, res) => {
   const id = req.params.id
+  const status = req.body.status
+
+  await Task.updateOne({
+    _id: id,
+    status: status
+  })
+
+
 
   console.log(req.body)
   res.json({
-    id: id
+    code: 200,
+    message: "Cập nhật trạng thái thành công!"
   })
 }
