@@ -46,6 +46,7 @@ module.exports.index = async (req, res) => {
   res.json(tasks)
 }
 
+
 module.exports.detail = async (req, res) => {
   try {
     const id = req.params.id
