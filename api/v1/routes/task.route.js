@@ -6,5 +6,7 @@ const controller = require("../controllers/task.controller")
 router.get("/", controller.index)
 
 router.get("/detail", controller.detail)
+router.patch("/change-status/:id", controller.changeStatus)
+
 
 module.exports = router;
