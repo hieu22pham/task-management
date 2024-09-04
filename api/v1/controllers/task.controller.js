@@ -46,7 +46,6 @@ module.exports.index = async (req, res) => {
   res.json(tasks)
 }
 
-
 module.exports.detail = async (req, res) => {
   try {
     const id = req.params.id
@@ -84,3 +83,35 @@ module.exports.changeStatus = async (req, res) => {
     })
   }
 }
+
+module.exports.changeMulti = async (req, res) => {
+  try {
+    const { ids, key, value } = req.body
+
+    switch (key) {
+      case "status":
+        await Task.updateMany({
+          _id: { $in: ids },
+          status: value
+        })
+
+        res.json({
+          code: 200,
+          message: "Cập nhật trạng thái thành công!"
+        })
+      default:
+        res.json({
+          code: 400,
+          message: "Không tồn tại!"
+        })
+    }
+
+  }
+  catch (e) {
+    res.json({
+      code: 400,
+      message: "Không tồn tại!"
+    })
+  }
+}
+
