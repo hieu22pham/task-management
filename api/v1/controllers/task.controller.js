@@ -92,6 +92,7 @@ module.exports.changeMulti = async (req, res) => {
       case "status":
         await Task.updateMany({
           _id: { $in: ids },
+        }, {
           status: value
         })
 
@@ -99,13 +100,13 @@ module.exports.changeMulti = async (req, res) => {
           code: 200,
           message: "Cập nhật trạng thái thành công!"
         })
+        break;
       default:
         res.json({
           code: 400,
-          message: "Không tồn tại!"
+          message: "Không tồn tại trạng thái!"
         })
     }
-
   }
   catch (e) {
     res.json({
