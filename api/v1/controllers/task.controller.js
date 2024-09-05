@@ -160,7 +160,14 @@ module.exports.delete = async (req, res) => {
     console.log(id)
     console.log(req.body)
 
-    await Task.updateOne({ _id: id }, req.body)
+    await Task.updateOne({
+      _id: id
+    },
+      {
+        deleted: true,
+        deletedAt: new Date()
+      }
+    )
 
     res.json({
       code: 200,
