@@ -171,7 +171,7 @@ module.exports.delete = async (req, res) => {
 
     res.json({
       code: 200,
-      message: "Cập nhật thành công!"
+      message: "Xóa thành công!"
     })
   } catch (e) {
     res.json({
