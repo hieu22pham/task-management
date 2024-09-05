@@ -136,8 +136,11 @@ module.exports.create = async (req, res) => {
 
 module.exports.edit = async (req, res) => {
   try {
-    const task = new Task(req.body)
-    const data = await task.save()
+    const id = req.params.id
+
+    await Task.updateOne({
+      _id: id,
+    }, req.body)
 
     res.json({
       code: 200,
