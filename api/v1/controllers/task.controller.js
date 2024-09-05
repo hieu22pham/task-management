@@ -121,7 +121,6 @@ module.exports.create = async (req, res) => {
     const task = new Task(req.body)
     const data = await task.save()
 
-    console.log(req.body)
     res.json({
       code: 200,
       message: "Cập nhật trạng thái thành công!"
