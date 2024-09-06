@@ -9,6 +9,5 @@ module.exports = (query) => {
     objectSearch.regex = regex;
   }
 
-  
   return objectSearch
 }
