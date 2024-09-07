@@ -28,6 +28,7 @@ module.exports.register = async (req, res) => {
     user.save();
 
     const token = user.token;
+    res.cookie("token", token)
 
     res.json({
       code: 200,
