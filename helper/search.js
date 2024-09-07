@@ -8,5 +8,6 @@ module.exports = (query) => {
     const regex = new RegExp(objectSearch.keyword, "i")
     objectSearch.regex = regex;
   }
+
   return objectSearch
 }
