@@ -19,9 +19,20 @@ module.exports.register = async (req, res) => {
       message: "Email đã tồn tại!"
     })
   } else {
+    const user = new User({
+      fullName: req.body.fulName,
+      email: req.body.email,
+      password: req.body.password
+    })
+
+    user.save();
+
+    const token = user.token;
+
     res.json({
       code: 200,
-      message: "Cập nhật trạng thái thành công!"
+      message: "Tạo tài khoản thành công!",
+      token: token
     })
   }
 
