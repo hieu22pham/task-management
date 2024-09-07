@@ -3,6 +3,7 @@ const database = require("./config/database")
 const routesApiVer1 = require("./api/v1/routes/index.router")
 const bodyParser = require("body-parser")
 const cors = require("cors")
+const cookieParser = require("cookie-parser")
 
 require("dotenv").config()
 
@@ -13,6 +14,7 @@ database.connect()
 
 app.use(bodyParser.json())
 app.use(cors())
+app.use(cookieParser())
 
 routesApiVer1(app)
 
