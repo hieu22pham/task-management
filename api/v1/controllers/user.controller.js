@@ -36,5 +36,4 @@ module.exports.register = async (req, res) => {
       token: token
     })
   }
-
 }
