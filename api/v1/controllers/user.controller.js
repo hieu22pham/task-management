@@ -121,22 +121,40 @@ module.exports.forgotPassword = async (req, res) => {
 }
 
 module.exports.otpPassword = async (req, res) => {
-  const email = req.body.email
-  const otp = req.body.otp
+  try {
+    const email = req.body.email
+    const otp = req.body.otp
 
-  const result = await ForgotPassword.findOne({
-    email: email,
-    otp: otp
-  })
+    const result = await ForgotPassword.findOne({
+      email: email,
+      otp: otp
+    })
 
-  if (!result) {
+    if (!result) {
+      res.json({
+        code: 400,
+        message: "Mã OTP không hợp lệ!",
+      })
+
+      return;
+    }
+
+    const user = await User.findOne({
+      email: email
+    })
+
+    const token = user.token
+    res.cookie("token", token)
+
+    res.json({
+      code: 200,
+      message: "Xác thực thành công!",
+      token: token
+    })
+  } catch (error) {
     res.json({
       code: 400,
-      message: "Mã OTP không hợp lệ!",
+      message: "Lỗi hệ thống",
     })
   }
-
-  res.json({
-    code: 200,
-  })
 }
