@@ -1,6 +1,8 @@
 const md5 = require("md5")
 const User = require("../models/user.model")
 const generateHelper = require("../../../helper/generate")
+const ForgotPassword = require("../models/forgot-password.model")
+
 
 //[POST] /api/v1/users/register
 module.exports.register = async (req, res) => {
@@ -98,6 +100,10 @@ module.exports.forgotPassword = async (req, res) => {
     otp: otp,
     expireAt: Date.now() + timeExpire * 60
   }
+
+  const forgotPassword = new ForgotPassword(objectForgotPassword)
+
+  await forgotPassword.save()
 
   res.json({
     code: 200,
