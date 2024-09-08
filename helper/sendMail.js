@@ -1,21 +1,21 @@
 const nodemailer = require("nodemailer")
 
-module.exports.sendMail = () => {
+module.exports.sendMail = (email, subject, html) => {
   const nodemailer = require("nodemailer");
 
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-      user: "maddison53@ethereal.email",
-      pass: "jn7jnAPss4f63QBp6D",
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASSWORD,
     },
   });
 
   const mailOptions = {
-    from: '',
-    to: '',
-    subject: 'Subject',
-    text: ''
+    from: 'phammhieu2211@gmail.com',
+    to: 'email',
+    subject: subject,
+    html: html
   }
 
   transporter.sendMail(mailOptions, function (error, info) {
