@@ -91,12 +91,12 @@ module.exports.forgotPassword = async (req, res) => {
   }
 
   const otp = generateHelper.generateRandomNumber(6)
-  const timeExpire = 5
+  const timeExpire = 3
 
   const objectForgotPassword = {
     email: email,
     otp: otp,
-    expireAt: Date.now() + timeExpire*60
+    expireAt: Date.now() + timeExpire * 60
   }
 
   res.json({
