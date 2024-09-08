@@ -107,6 +107,6 @@ module.exports.forgotPassword = async (req, res) => {
 
   res.json({
     code: 200,
-    message: "Đăng nhập thành công!",
+    message: "Mã OTP sẽ hết hạn sau 3 phút!",
   })
 }
