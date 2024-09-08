@@ -1,5 +1,6 @@
 const md5 = require("md5")
 const User = require("../models/user.model")
+const generateHelper = require("../../../helper/generate")
 
 //[POST] /api/v1/users/register
 module.exports.register = async (req, res) => {
@@ -65,6 +66,38 @@ module.exports.login = async (req, res) => {
 
   const token = user.token
   res.cookie("token", token)
+
+  res.json({
+    code: 200,
+    message: "Đăng nhập thành công!",
+  })
+}
+
+module.exports.forgotPassword = async (req, res) => {
+  const email = req.body.email
+
+  const user = await User.findOne({
+    email: email,
+    deleted: false
+  })
+
+  if (!user) {
+    res.json({
+      code: 400,
+      message: "Email không tồn tại!",
+    })
+
+    return;
+  }
+
+  const otp = generateHelper.generateRandomNumber(6)
+  const timeExpire = 5
+
+  const objectForgotPassword = {
+    email: email,
+    otp: otp,
+    expireAt: Date.now() + timeExpire*60
+  }
 
   res.json({
     code: 200,
