@@ -1,6 +1,7 @@
 const md5 = require("md5")
 const User = require("../models/user.model")
 const generateHelper = require("../../../helper/generate")
+const sendMailHelper = require("../../../helper/sendMail")
 const ForgotPassword = require("../models/forgot-password.model")
 
 
@@ -104,6 +105,14 @@ module.exports.forgotPassword = async (req, res) => {
   const forgotPassword = new ForgotPassword(objectForgotPassword)
 
   await forgotPassword.save()
+
+  const subject = "Mã OTP xác minh lấy lại mật khẩu"
+  const html = `
+  Mã OTP để lấy lại mật khẩu của bạn là <b>${otp}</b> (Sử dụng trong ${timeExpire} phút).
+  Vui lòng không chia sẻ OTP này với bất kỳ ai.
+  `;
+
+  sendMailHelper.sendMail(email, subject, html)
 
   res.json({
     code: 200,
