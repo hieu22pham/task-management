@@ -160,7 +160,7 @@ module.exports.otpPassword = async (req, res) => {
 }
 
 module.exports.resetPassword = async (req, res) => {
-  const token = req.body.token
+  const token = req.cookies.token
   const password = req.body.password
 
   const user = await User.findOne({
