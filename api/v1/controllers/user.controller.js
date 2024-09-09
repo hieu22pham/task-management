@@ -193,17 +193,10 @@ module.exports.resetPassword = async (req, res) => {
 
 module.exports.detail = async (req, res) => {
   try {
-    const token = req.cookies.token;
-
-    const user = await User.findOne({
-      token: token,
-      deleted: false
-    }).select("-password")
-
     res.json({
       code: 200,
       message: "Lấy thông tin thành công!",
-      info: user
+      info: req.user
     })
   } catch (error) {
     res.json({
