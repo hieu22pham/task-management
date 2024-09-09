@@ -189,3 +189,18 @@ module.exports.resetPassword = async (req, res) => {
     message: "Đổi mật khẩu thành công!",
   })
 }
+
+module.exports.detail = async (req, res) => {
+  const token = req.cookies.token;
+
+  const user = await User.findOne({
+    token: token,
+    deleted: false
+  })
+
+  res.json({
+    code: 200,
+    message: "Lấy thông tin thành công!",
+    info: user
+  })
+}
