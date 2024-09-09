@@ -198,7 +198,7 @@ module.exports.detail = async (req, res) => {
     const user = await User.findOne({
       token: token,
       deleted: false
-    }).select("-password -token")
+    }).select("-password")
 
     res.json({
       code: 200,
