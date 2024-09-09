@@ -132,7 +132,7 @@ module.exports.otpPassword = async (req, res) => {
 
     if (!result) {
       res.json({
-        code: 400,
+        code: 404,
         message: "Mã OTP không hợp lệ!",
       })
 
@@ -153,7 +153,7 @@ module.exports.otpPassword = async (req, res) => {
     })
   } catch (error) {
     res.json({
-      code: 400,
+      code: 404,
       message: "Lỗi hệ thống",
     })
   }
@@ -191,16 +191,23 @@ module.exports.resetPassword = async (req, res) => {
 }
 
 module.exports.detail = async (req, res) => {
-  const token = req.cookies.token;
+  try {
+    const token = req.cookies.token;
 
-  const user = await User.findOne({
-    token: token,
-    deleted: false
-  })
+    const user = await User.findOne({
+      token: token,
+      deleted: false
+    }).select("-password -token")
 
-  res.json({
-    code: 200,
-    message: "Lấy thông tin thành công!",
-    info: user
-  })
+    res.json({
+      code: 200,
+      message: "Lấy thông tin thành công!",
+      info: user
+    })
+  } catch (error) {
+    res.json({
+      code: 404,
+      message: "Lỗi hệ thống!",
+    })
+  }
 }
