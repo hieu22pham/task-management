@@ -205,3 +205,18 @@ module.exports.detail = async (req, res) => {
     })
   }
 }
+
+module.exports.list = async (req, res) => {
+  try {
+    const user = 
+    res.json({
+      code: 200,
+      message: "Lấy thông tin thành công!",
+    })
+  } catch (error) {
+    res.json({
+      code: 404,
+      message: "Lỗi hệ thống!",
+    })
+  }
+}
