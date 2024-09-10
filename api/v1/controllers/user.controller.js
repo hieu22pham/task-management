@@ -208,12 +208,14 @@ module.exports.detail = async (req, res) => {
 
 module.exports.list = async (req, res) => {
   try {
-    const user = await User.find({
+    const users = await User.find({
       deleted: false
     }).select("fullName email")
+
     res.json({
       code: 200,
       message: "Lấy thông tin thành công!",
+      users: users
     })
   } catch (error) {
     res.json({
