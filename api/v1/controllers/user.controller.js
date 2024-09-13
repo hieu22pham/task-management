@@ -212,7 +212,6 @@ module.exports.list = async (req, res) => {
       deleted: false
     }).select("fullName email")
 
-    
     res.json({
       code: 200,
       message: "Lấy thông tin thành công!",
